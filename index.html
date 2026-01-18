@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для Любимой ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;font-family:'Montserrat',sans-serif}
+body{
+margin:0;
+background:radial-gradient(circle at top,#ffd1dc,#ee9ca7);
+color:#fff;
+text-align:center;
+overflow-x:hidden;
+}
+
+.bg-heart{
+position:fixed;
+opacity:.2;
+pointer-events:none;
+animation:floatBg linear infinite;
+}
+@keyframes floatBg{
+from{transform:translateY(120vh)}
+to{transform:translateY(-140vh)}
+}
+
+.section{
+min-height:100vh;
+display:none;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+}
+.section.active{display:flex}
+
+.card{
+background:rgba(255,255,255,.18);
+backdrop-filter:blur(18px);
+border-radius:28px;
+padding:35px 25px;
+max-width:680px;
+width:100%;
+box-shadow:0 20px 50px rgba(0,0,0,.15);
+animation:fadeUp .8s ease;
+}
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(25px)}
+to{opacity:1;transform:translateY(0)}
+}
+
+h1{text-shadow:0 0 15px rgba(255,255,255,.4)}
+p{line-height:1.7}
+
+button{
+margin-top:18px;
+padding:15px 32px;
+border:none;
+border-radius:30px;
+background:#fff;
+color:#ee9ca7;
+font-size:1em;
+cursor:pointer;
+transition:.3s;
+}
+button:hover{transform:scale(1.06)}
+
+.answers button{
+display:block;
+width:100%;
+max-width:300px;
+margin:10px auto;
+}
+
+.result{
+background:rgba(255,255,255,.15);
+border-radius:18px;
+padding:18px;
+margin-top:20px;
+text-align:left;
+}
+
+.whisper{
+margin-top:25px;
+font-size:.9em;
+opacity:.6;
+display:none;
+}
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:22px;
+animation:float 6s linear infinite;
+}
+@keyframes float{
+from{transform:translateY(0);opacity:1}
+to{transform:translateY(-120vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<script>
+for(let i=0;i<22;i++){
+let h=document.createElement('div');
+h.className='bg-heart';
+h.innerHTML='❤️';
+h.style.left=Math.random()*100+'vw';
+h.style.fontSize=(Math.random()*18+12)+'px';
+h.style.animationDuration=(Math.random()*30+20)+'s';
+document.body.appendChild(h);
+}
+</script>
+
+<div class="section active" id="start">
+<div class="card">
+<h1>Привет, Любимая ❤️</h1>
+<p>Я сделал для тебя кое-что особенное.<br>В этом сайте — всё, что я чувствую.</p>
+<button onclick="next('q1')">Начать</button>
+<div class="whisper">Мне нравится, что ты здесь.</div>
+</div>
+</div>
+
+
+<div class="section" id="q1"><div class="card">
+<h1>Вопрос 1</h1>
+<p>Что для тебя самое важное в отношениях?</p>
+<div class="answers">
+<button onclick="answer(1,'Забота','q2')">Забота</button>
+<button onclick="answer(1,'Честность','q2')">Честность</button>
+<button onclick="answer(1,'Поддержка','q2')">Поддержка</button>
+<button onclick="answer(1,'Любовь','q2')">Любовь</button>
+</div>
+<div class="whisper">Мне нравится, что ты здесь.</div>
+</div></div>
+
+<div class="section" id="q2"><div class="card">
+<h1>Вопрос 2</h1>
+<p>Веришь ли ты, что любовь может быть навсегда?</p>
+<div class="answers">
+<button onclick="answer(2,'Да','q3')">Да</button>
+<button onclick="answer(2,'Очень хочу верить','q3')">Очень хочу верить</button>
+<button onclick="answer(2,'Уже верю','q3')">Уже верю</button>
+</div>
+<div class="whisper">Мне нравится, что ты здесь.</div>
+</div></div>
+
+<div class="section" id="q3"><div class="card">
+<h1>Вопрос 3</h1>
+<p>Где ты чувствуешь себя дома?</p>
+<div class="answers">
+<button onclick="answer(3,'Там, где тепло','q4')">Там, где тепло</button>
+<button onclick="answer(3,'Там, где любят','q4')">Там, где любят</button>
+<button onclick="answer(3,'Рядом с близким человеком','q4')">Рядом с близким человеком</button>
+</div>
+<div class="whisper">Мне нравится, что ты здесь.</div>
+</div></div>
+
+<div class="section" id="q4"><div class="card">
+<h1>Вопрос 4</h1>
+<p>Страшно ли тебе будущее?</p>
+<div class="answers">
+<button onclick="answer(4,'Иногда','pause')">Иногда</button>
+<button onclick="answer(4,'Немного','pause')">Немного</button>
+<button onclick="answer(4,'Нет, если мы вместе','pause')">Нет, если мы вместе</button>
+</div>
+<div class="whisper">Мне нравится, что ты здесь.</div>
+</div></div>
+
+
+<div class="section" id="pause">
+<div class="card">
+<p style="font-size:1.3em;">Сделай вдох.<br>И просто будь здесь.</p>
+<button id="readyBtn" style="display:none" onclick="next('result')">Я готова</button>
+</div>
+</div>
+
+
+<div class="section" id="result">
+<div class="card">
+<h1>Твои ответы ❤️</h1>
+<div class="result" id="resultText"></div>
+<button onclick="next('final')">Дальше</button>
+</div>
+</div>
+
+
+<div class="section" id="final">
+<div class="card">
+<h1>Любимая…</h1>
+<p style="font-size:1.35em;">Ты станешь моей женой? 💍</p>
+<button onclick="yes()">Да ❤️</button>
+<button onclick="yes()">Конечно да 🥹</button>
+<button onclick="wait()">Мне нужно ещё немного времени</button>
+</div>
+</div>
+
+
+<div class="section" id="wait">
+<div class="card">
+<p style="font-size:1.3em;line-height:1.8;">
+Я подожду.<br><br>
+Потому что люблю тебя.
+</p>
+</div>
+</div>
+
+
+<div class="section" id="promise">
+<div class="card">
+<p style="font-size:1.3em;line-height:1.8;">
+Это не сайт.<br>
+Это моё обещание.<br><br>
+Я всегда буду рядом.<br><br>
+Твой.
+</p>
+</div>
+</div>
+
+<script>
+let answers={};
+let whisperTimer;
+
+document.querySelectorAll('.card').forEach(card=>{
+card.addEventListener('mouseenter',()=>{
+let w=card.querySelector('.whisper');
+if(w){
+whisperTimer=setTimeout(()=>w.style.display='block',12000);
+}
+});
+card.addEventListener('mouseleave',()=>{
+clearTimeout(whisperTimer);
+});
+});
+
+function answer(q,text,nextId){
+answers[q]=text;
+localStorage.setItem('loveAnswers',JSON.stringify(answers));
+next(nextId);
+}
+
+function next(id){
+document.querySelector('.section.active').classList.remove('active');
+document.getElementById(id).classList.add('active');
+
+if(id==='pause'){
+setTimeout(()=>document.getElementById('readyBtn').style.display='inline-block',4000);
+}
+
+if(id==='result'){
+let saved=JSON.parse(localStorage.getItem('loveAnswers'))||answers;
+resultText.innerHTML=`
+<b>Самое важное:</b> ${saved[1]}<br>
+<b>Любовь навсегда:</b> ${saved[2]}<br>
+<b>Дом:</b> ${saved[3]}<br>
+<b>Будущее:</b> ${saved[4]}<br><br>
+<small style="opacity:.7">
+Я не выбирал ответы.<br>
+Я просто выбирал тебя.
+</small>`;
+}
+}
+
+function yes(){
+next('promise');
+for(let i=0;i<40;i++){
+let h=document.createElement('div');
+h.className='heart';
+h.innerHTML='❤️';
+h.style.left=Math.random()*100+'vw';
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),6000);
+}
+}
+
+function wait(){
+next('wait');
+}
+</script>
+
+</body>
+</html>
